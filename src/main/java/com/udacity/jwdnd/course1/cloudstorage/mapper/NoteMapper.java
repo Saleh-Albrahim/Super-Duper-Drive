@@ -6,8 +6,8 @@ import org.apache.ibatis.annotations.*;
 @Mapper
 public interface NoteMapper {
 
-    @Select("SELECT * FROM FILES WHERE userid= #{userid} ")
-    File[] getUserFiles(int userid);
+    @Select("SELECT * FROM NOTES WHERE userid = #{userId}")
+    Note[] getNotesForUser(Integer userId);
 
     @Insert("INSERT INTO FILES (filename, contenttype, filesize, userid, filedata) " +
             "VALUES(#{fileName}, #{contentType}, #{fileSize}, #{userId}, #{fileData})")
