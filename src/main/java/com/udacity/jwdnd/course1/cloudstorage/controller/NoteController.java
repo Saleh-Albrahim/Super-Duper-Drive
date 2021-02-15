@@ -2,6 +2,7 @@ package com.udacity.jwdnd.course1.cloudstorage.controller;
 
 import com.udacity.jwdnd.course1.cloudstorage.model.Credential.CredentialForm;
 import com.udacity.jwdnd.course1.cloudstorage.model.File.FileForm;
+import com.udacity.jwdnd.course1.cloudstorage.model.Note.Note;
 import com.udacity.jwdnd.course1.cloudstorage.model.Note.NoteForm;
 import com.udacity.jwdnd.course1.cloudstorage.security.EncryptionService;
 import com.udacity.jwdnd.course1.cloudstorage.security.UserService;
@@ -14,8 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/home")
-public class HomeController {
+@RequestMapping("/note")
+public class NoteController {
 
     private final UserService userService;
     private final FileService fileService;
@@ -24,7 +25,7 @@ public class HomeController {
     private final CredentialService credentialService;
 
 
-    public HomeController(UserService userService, FileService fileService,
+    public NoteController(UserService userService, FileService fileService,
                           NoteService noteService, EncryptionService encryptionService, CredentialService credentialService) {
         this.userService = userService;
         this.fileService = fileService;
@@ -34,17 +35,22 @@ public class HomeController {
     }
 
 
-    @GetMapping
-    public String getHomePage(Authentication authentication, @ModelAttribute("newFile") FileForm newFile,
-            @ModelAttribute("newNote") NoteForm newNote, @ModelAttribute("newCredential") CredentialForm newCredential,
-            Model model) {
-        int userId = userService.getUser(authentication.getName()).getUserId();
-        model.addAttribute("files", fileService.getUserFiles(userId));
-        model.addAttribute("notes", noteService.getUserNotes(userId));
-        model.addAttribute("credentials", credentialService.getUserCredentials(userId));
-        model.addAttribute("encryptionService", encryptionService);
+    @PostMapping("/add")
+    public String addNote(Authentication authentication, @ModelAttribute("newNote") NoteForm newNote) {
 
-        return "home";
+        int userId = userService.getUser(authentication.getName()).getUserId();
+        noteService.addNote(new Note(newNote.getTitle(),newNote.getDescription(),userId));
+
+        return "redirect:/home";
+    }
+
+    @PutMapping("/update")
+    public String updateNote(Authentication authentication, @ModelAttribute("newNote") NoteForm newNote, Model model) {
+
+        int userId = userService.getUser(authentication.getName()).getUserId();
+        noteService.addNote(new Note(newNote.getTitle(),newNote.getDescription(),userId));
+
+        return "redirect:/home";
     }
 
 

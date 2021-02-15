@@ -16,6 +16,7 @@ public class NoteService {
     }
 
     public Note[] getUserNotes(int userId){
+
         return noteMapper.getUserNotes(userId);
     }
 

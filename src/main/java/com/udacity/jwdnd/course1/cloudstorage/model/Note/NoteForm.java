@@ -15,7 +15,7 @@ public class NoteForm {
     public String getNoteId() {
         return noteId;
     }
-
+    
     public void setNoteId(String noteId) {
         this.noteId = noteId;
     }
@@ -34,5 +34,14 @@ public class NoteForm {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "NoteForm{" +
+                "noteId='" + noteId + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
