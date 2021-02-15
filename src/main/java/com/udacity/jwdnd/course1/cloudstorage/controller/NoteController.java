@@ -39,19 +39,17 @@ public class NoteController {
     public String addNote(Authentication authentication, @ModelAttribute("newNote") NoteForm newNote) {
 
         int userId = userService.getUser(authentication.getName()).getUserId();
-        noteService.addNote(new Note(newNote.getTitle(),newNote.getDescription(),userId));
+
+        if(newNote.getNoteId().isEmpty()) {
+            noteService.addNote(new Note(newNote.getTitle(), newNote.getDescription(), userId));
+        }
+        else {
+            noteService.updateNote(new Note(Integer.parseInt(newNote.getNoteId()),newNote.getTitle(), newNote.getDescription(), userId));
+        }
 
         return "redirect:/home";
     }
 
-    @GetMapping("/update/{noteId}")
-    public String updateNote(Authentication authentication, @ModelAttribute("newNote") NoteForm newNote) {
-
-        int userId = userService.getUser(authentication.getName()).getUserId();
-        noteService.addNote(new Note(newNote.getTitle(),newNote.getDescription(),userId));
-
-        return "redirect:/home";
-    }
 
     @GetMapping("/delete/{noteId}")
     public String deleteeNote(Authentication authentication, @PathVariable int noteId) {
