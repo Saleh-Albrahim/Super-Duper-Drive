@@ -1,20 +1,21 @@
 package com.udacity.jwdnd.course1.cloudstorage.mapper;
 
 import com.udacity.jwdnd.course1.cloudstorage.model.File.File;
+import com.udacity.jwdnd.course1.cloudstorage.model.Note.Note;
 import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface NoteMapper {
 
     @Select("SELECT * FROM NOTES WHERE userid = #{userId}")
-    Note[] getNotesForUser(Integer userId);
+    Note[] getUserNotes(Integer userId);
 
-    @Insert("INSERT INTO FILES (filename, contenttype, filesize, userid, filedata) " +
-            "VALUES(#{fileName}, #{contentType}, #{fileSize}, #{userId}, #{fileData})")
+    @Insert("INSERT INTO NOTES (noteid, notetitle, notedescription, userid) " +
+            "VALUES(#{noteId}, #{noteTitle}, #{noteDescription}, #{userId})")
     @Options(useGeneratedKeys = true, keyProperty = "fileId")
-    int insert(File file);
+    int addNote(Note note);
 
-    @Delete("DELETE FROM FILES WHERE filename = #{fileName}")
-    void deleteFile(String fileName);
+    @Delete("DELETE FROM NOTES WHERE noteid = #{noteId}")
+    void deleteNote(int noteId);
 
 }
