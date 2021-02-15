@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.*;
 public interface NoteMapper {
 
     @Select("SELECT * FROM NOTES WHERE userid = #{userId}")
-    Note[] getUserNotes(Integer userId);
+    Note[] getUserNotes(int userId);
 
     @Insert("INSERT INTO NOTES (noteid, notetitle, notedescription, userid) " +
             "VALUES(#{noteId}, #{noteTitle}, #{noteDescription}, #{userId})")
