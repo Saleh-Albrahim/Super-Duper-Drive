@@ -4,7 +4,7 @@ import com.udacity.jwdnd.course1.cloudstorage.model.File.File;
 import org.apache.ibatis.annotations.*;
 
 @Mapper
-public interface FileMapper {
+public interface NoteMapper {
 
     @Select("SELECT * FROM FILES WHERE userid= #{userid} ")
     File[] getUserFiles(int userid);

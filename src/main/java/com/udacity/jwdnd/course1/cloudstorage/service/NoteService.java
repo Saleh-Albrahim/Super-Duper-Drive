@@ -4,14 +4,12 @@ import com.udacity.jwdnd.course1.cloudstorage.mapper.FileMapper;
 import com.udacity.jwdnd.course1.cloudstorage.model.File.File;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class FileService {
+public class NoteService {
 
     private final FileMapper fileMapper;
 
-    public FileService(FileMapper fileMapper) {
+    public NoteService(FileMapper fileMapper) {
         this.fileMapper = fileMapper;
     }
 
