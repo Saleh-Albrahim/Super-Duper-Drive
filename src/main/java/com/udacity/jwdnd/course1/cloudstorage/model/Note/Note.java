@@ -7,6 +7,7 @@ public class Note {
     private int userId;
 
     public Note(int noteId,String noteTitle, String noteDescription, int userId) {
+        this.noteId=noteId;
         this.noteTitle = noteTitle;
         this.noteDescription = noteDescription;
         this.userId = userId;
@@ -18,10 +19,6 @@ public class Note {
         this.userId = userId;
     }
 
-    public Note(String noteTitle, String noteDescription) {
-        this.noteTitle = noteTitle;
-        this.noteDescription = noteDescription;
-    }
 
     public int getNoteId() {
         return noteId;

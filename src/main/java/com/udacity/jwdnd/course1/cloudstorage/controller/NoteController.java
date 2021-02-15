@@ -44,11 +44,19 @@ public class NoteController {
         return "redirect:/home";
     }
 
-    @PutMapping("/update")
-    public String updateNote(Authentication authentication, @ModelAttribute("newNote") NoteForm newNote, Model model) {
+    @GetMapping("/update/{noteId}")
+    public String updateNote(Authentication authentication, @ModelAttribute("newNote") NoteForm newNote) {
 
         int userId = userService.getUser(authentication.getName()).getUserId();
         noteService.addNote(new Note(newNote.getTitle(),newNote.getDescription(),userId));
+
+        return "redirect:/home";
+    }
+
+    @GetMapping("/delete/{noteId}")
+    public String deleteeNote(Authentication authentication, @PathVariable int noteId) {
+
+        noteService.deleteNote(noteId);
 
         return "redirect:/home";
     }
