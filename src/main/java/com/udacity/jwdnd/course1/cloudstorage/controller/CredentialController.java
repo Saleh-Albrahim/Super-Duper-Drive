@@ -2,6 +2,7 @@ package com.udacity.jwdnd.course1.cloudstorage.controller;
 
 import com.udacity.jwdnd.course1.cloudstorage.model.Credential.Credential;
 import com.udacity.jwdnd.course1.cloudstorage.model.Credential.CredentialForm;
+import com.udacity.jwdnd.course1.cloudstorage.model.Note.Note;
 import com.udacity.jwdnd.course1.cloudstorage.model.Note.NoteForm;
 import com.udacity.jwdnd.course1.cloudstorage.security.EncryptionService;
 import com.udacity.jwdnd.course1.cloudstorage.security.UserService;
@@ -33,11 +34,19 @@ public class CredentialController {
 
         int userId = userService.getUser(authentication.getName()).getUserId();
 
-        credentialService.addCredential(new Credential(userId,newCredential.getUrl(),
-                newCredential.getUserName(),newCredential.getPassword()));
+
+        if(newCredential.getCredentialId().isEmpty()) {
+            credentialService.addCredential(new Credential(userId,newCredential.getUrl(),
+                    newCredential.getUserName(),newCredential.getPassword()));
+        }
+        else {
+            credentialService.updateCredential(new Credential(userId,Integer.parseInt(newCredential.getCredentialId()),newCredential.getUrl(),
+                    newCredential.getUserName(),newCredential.getPassword()));
+        }
 
         return "redirect:/home";
     }
+
 
 
     @GetMapping("/delete/{credentialId}")

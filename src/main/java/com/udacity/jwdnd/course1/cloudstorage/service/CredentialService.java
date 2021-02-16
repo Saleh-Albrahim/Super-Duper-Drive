@@ -46,7 +46,7 @@ public class CredentialService {
         credentialMapper.addCredential(credential);
     }
 
-    public void UpdateCredential(Credential credential){
+    public void updateCredential(Credential credential){
 
         String decryptedPassword=credential.getDecryptedPassword();
 
@@ -59,7 +59,9 @@ public class CredentialService {
         // Encrypt the password and change the old password
         String newPassword=encryptionService.encrypt(decryptedPassword,key);
         credential.setPassword(newPassword);
-        credentialMapper.(credential);
+
+
+        credentialMapper.updateCredential(credential);
     }
 
     public void deleteCredential(int credentialId){ credentialMapper.deleteCredential(credentialId); }
