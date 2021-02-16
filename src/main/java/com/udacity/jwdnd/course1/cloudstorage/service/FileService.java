@@ -20,7 +20,7 @@ public class FileService {
     }
 
     public  File getFileData(int fileId)   {
-        return fileMapper.getFileData(fileId);
+        return fileMapper.getFileWithId(fileId);
     }
 
 
@@ -30,7 +30,12 @@ public class FileService {
 
 
     public void addFile(File file){
-        fileMapper.addFile(file);
+        if(fileMapper.getFileWithName(file.getFileName())!=null){
+            throw new IllegalStateException("This file name already exist ");
+        }
+        else {
+            fileMapper.addFile(file);
+        }
     }
 
 
