@@ -24,7 +24,6 @@ public class NoteController {
     private final EncryptionService encryptionService;
     private final CredentialService credentialService;
 
-
     public NoteController(UserService userService, FileService fileService,
                           NoteService noteService, EncryptionService encryptionService, CredentialService credentialService) {
         this.userService = userService;

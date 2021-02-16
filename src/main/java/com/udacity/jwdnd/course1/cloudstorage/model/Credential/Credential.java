@@ -6,6 +6,16 @@ public class Credential {
     private String userName;
     private String key;
     private String password;
+
+    public String getDecryptedPassword() {
+        return decryptedPassword;
+    }
+
+    public void setDecryptedPassword(String decryptedPassword) {
+        this.decryptedPassword = decryptedPassword;
+    }
+
+    private String decryptedPassword;
     private Integer userid;
 
     public Credential(int credentialid, String url, String userName, String key, String password, Integer userid) {
@@ -17,10 +27,11 @@ public class Credential {
         this.userid = userid;
     }
 
-    public Credential(String url, String userName, String password) {
+    public Credential(int userid,String url, String userName, String decryptedPassword) {
+        this.userid=userid;
         this.url = url;
         this.userName = userName;
-        this.password = password;
+        this.decryptedPassword = decryptedPassword;
     }
 
     public Integer getCredentialid() {

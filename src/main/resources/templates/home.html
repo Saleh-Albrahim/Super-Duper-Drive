@@ -161,11 +161,11 @@
                                         th:data-id="${credential.getCredentialid()}"
                                         th:data-url="${credential.getUrl()}"
                                         th:data-username="${credential.getUserName()}"
-                                        th:data-decryptedPassword = "${encryptionService.decryptValue(credential.password, credential.key)}"
-                                        th:onclick="showCredentialModal(this.getAttribute('data-id'), this.getAttribute('data-url'), this.getAttribute('data-username'), this.getAttribute('data-decryptedPassword'))">
+                                        th:data-password = "${credential.getDecryptedPassword()}"
+                                        th:onclick="showCredentialModal(this.getAttribute('data-id'), this.getAttribute('data-url'), this.getAttribute('data-username'), this.getAttribute('data-password'))">
                                     Edit</button>
                                 <a class="btn btn-danger" id="aDeleteCredential"
-                                   th:href="@{/credential/delete-credential/{credentialId}(credentialId = ${credential.getCredentialid()})}">Delete</a>
+                                   th:href="@{/credential/delete/{credentialId}(credentialId = ${credential.getCredentialid()})}">Delete</a>
                             </td>
                             <th id="tblCredentialUrl" scope="row" th:text="${credential.getUrl()}">Example Credential URL</th>
                             <td id="tblCredentialUsername" th:text="${credential.getUserName()}">Example Credential Username</td>
@@ -186,7 +186,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form action="#" method="POST" th:action="@{/credential/add-credential}" th:object="${newCredential}">
+                                <form action="#" method="POST" th:action="@{/credential/add}" th:object="${newCredential}">
                                     <input type="hidden" name="credentialId" th:field="*{credentialId}" id="credential-id">
                                     <div class="form-group">
                                         <label for="note-title" class="col-form-label">URL</label>
