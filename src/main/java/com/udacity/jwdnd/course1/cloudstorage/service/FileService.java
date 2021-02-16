@@ -6,6 +6,8 @@ import com.udacity.jwdnd.course1.cloudstorage.model.File.File;
 import com.udacity.jwdnd.course1.cloudstorage.model.Note.Note;
 import org.springframework.stereotype.Service;
 
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.List;
 
 @Service
@@ -15,6 +17,10 @@ public class FileService {
 
     public FileService(FileMapper fileMapper) {
         this.fileMapper = fileMapper;
+    }
+
+    public  File getFileData(int fileId)   {
+        return fileMapper.getFileData(fileId);
     }
 
 
@@ -27,9 +33,8 @@ public class FileService {
         fileMapper.addFile(file);
     }
 
-    public void updateFile(File file){fileMapper.updateFile(file);}
 
-    public void deleteFile(String filename){ fileMapper.deleteFile(filename); }
+    public void deleteFile(int fileId){ fileMapper.deleteFile(fileId); }
 
 
 }
