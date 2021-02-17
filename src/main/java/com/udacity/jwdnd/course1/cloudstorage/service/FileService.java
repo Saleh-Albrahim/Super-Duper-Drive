@@ -39,7 +39,9 @@ public class FileService {
     }
 
 
-    public void deleteFile(int fileId){ fileMapper.deleteFile(fileId); }
+    public void deleteFile(int fileId){
+        fileMapper.deleteFile(fileId);
+    }
 
 
 }
